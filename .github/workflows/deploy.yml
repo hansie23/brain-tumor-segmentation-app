@@ -1,13 +1,12 @@
 name: Deploy to Google Cloud Run
 
 on:
-  # Trigger the workflow on pushes to the main branch
   push:
     branches:
       - main
 
 env:
-  PROJECT_ID: fresh-analyst-478219-u2 # TODO: update this
+  PROJECT_ID: fresh-analyst-478219-u2
   GAR_LOCATION: us-central1 # TODO: update this to your Artifact Registry region
   SERVICE_NAME: brain-tumor-segmentation # TODO: update this to your Cloud Run service name
 
@@ -16,7 +15,6 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     
-    # Add "id-token" with the intended permissions.
     permissions:
       contents: 'read'
       id-token: 'write'
@@ -49,7 +47,7 @@ jobs:
         uses: 'google-github-actions/deploy-cloudrun@v1'
         with:
           service: ${{ env.SERVICE_NAME }}
-          region: ${{ env.GAR_LOCATION }} # Deploy to the same region as the Artifact Registry
-          # Deploy the image we just built and pushed
+          region: ${{ env.GAR_LOCATION }}
+
           image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: '--allow-unauthenticated' # Makes the service publicly accessible
