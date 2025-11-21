@@ -30,7 +30,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           workload_identity_provider: 'projects/489881509776/locations/global/workloadIdentityPools/github-pool/providers/github-provider' # TODO: update this
-          service_account: '489881509776-compute@developer.gserviceaccount.com' # TODO: update this
+          service_account: 'github-actions-sa@fresh-analyst-478219-u2.iam.gserviceaccount.com' # TODO: update this
 
       - name: Set up Cloud SDK
         uses: 'google-github-actions/setup-gcloud@v1'
