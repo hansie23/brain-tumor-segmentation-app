@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 from huggingface_hub import hf_hub_download
+import os
 
 from unet_model import unet_model
 
@@ -20,6 +21,12 @@ def preprocess_image(image):
 def main():
     st.title('Brain Tumor Segmentation in MRI scans')
 
+    hugging_face_token = os.environ.get('HUGGING_FACE_HUB_TOKEN')
+
+    if not hugging_face_token:
+        st.error("Hugging Face token not found. Please set the HUGGING_FACE_HUB_TOKEN environment variable.")
+        return
+
     uploaded_image = st.file_uploader("Upload an MRI image", type=["jpg", "jpeg", "png", "tif"])
 
     if st.button('Predict'):
@@ -27,7 +34,8 @@ def main():
             # Download the model from Hugging Face Hub
             model_weights_path = hf_hub_download(
                 repo_id="hansie23/brain-tumor-segmentation-model",
-                filename="optimized_unet_checkpoint.keras"
+                filename="optimized_unet_checkpoint.keras",
+                use_auth_token=hugging_face_token
             )
             
             model = load_model_and_weights(model_weights_path)
