@@ -26,8 +26,8 @@ def main():
         if uploaded_image is not None:
             # Download the model from Hugging Face Hub
             model_weights_path = hf_hub_download(
-                repo_id="YOUR_HUGGINGFACE_USERNAME/YOUR_REPO_NAME",
-                filename="YOUR_MODEL_FILENAME.keras"
+                repo_id="hansie23/brain-tumor-segmentation-model",
+                filename="optimized_unet_checkpoint.keras"
             )
             
             model = load_model_and_weights(model_weights_path)
