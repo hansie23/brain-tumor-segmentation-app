@@ -1,0 +1,21 @@
+# Large model files
+optimized_unet_checkpoint.keras
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.env
+venv/
+env/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor specific
+.idea/
+.vscode/
