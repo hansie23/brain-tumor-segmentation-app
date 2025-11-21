@@ -56,5 +56,5 @@ jobs:
           image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: '--allow-unauthenticated'
           # Pass the Hugging Face token as an environment variable (for runtime, if needed elsewhere)
-          env-vars: |
+          env_vars: |
             HUGGING_FACE_HUB_TOKEN=${{ secrets.gcp_bts_app }}
