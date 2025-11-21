@@ -4,10 +4,9 @@ FROM python:3.9-slim
 # Set the working directory
 WORKDIR /app
 
-# Accept the Hugging Face token as a build argument
-ARG HUGGING_FACE_TOKEN
-# Set the Hugging Face token as an environment variable
-ENV HUGGING_FACE_HUB_TOKEN=$HUGGING_FACE_TOKEN
+# Mount a secret for the Hugging Face token
+RUN --mount=type=secret,id=hugging_face_token \
+    echo "Secrets are fun."
 
 # Copy requirements and install Python deps
 COPY requirements.txt ./requirements.txt
