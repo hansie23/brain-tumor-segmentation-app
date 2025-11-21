@@ -21,10 +21,16 @@ def preprocess_image(image):
 def main():
     st.title('Brain Tumor Segmentation in MRI scans')
 
-    hugging_face_token = os.environ.get('HUGGING_FACE_HUB_TOKEN')
+    # Read Hugging Face token from the mounted secret file
+    hugging_face_token_path = "/run/secrets/hugging_face_token"
+    if os.path.exists(hugging_face_token_path):
+        with open(hugging_face_token_path, "r") as f:
+            hugging_face_token = f.read().strip()
+    else:
+        hugging_face_token = None
 
     if not hugging_face_token:
-        st.error("Hugging Face token not found. Please set the HUGGING_FACE_HUB_TOKEN environment variable.")
+        st.error("Hugging Face token not found. Please ensure it's provided as a Docker build secret.")
         return
 
     uploaded_image = st.file_uploader("Upload an MRI image", type=["jpg", "jpeg", "png", "tif"])
