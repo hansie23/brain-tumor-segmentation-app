@@ -12,7 +12,7 @@ def load_model_and_weights(model_weights_path):
     return model
 
 def preprocess_image(image):
-    image = Image.open(image)
+    image = Image.open(image).convert('RGB')
     image = image.resize((112,112))
     new_image_array = np.array(image) / 255
     expanded_image_array = np.expand_dims(new_image_array, axis=0)
@@ -52,9 +52,9 @@ def main():
                 prediction = model.predict(preprocessed_image)
 
             col1, col2 = st.columns(2)
-            col1.image(uploaded_image, caption='Uploaded Image', use_container_width=True)
+            col1.image(uploaded_image, caption='Uploaded Image', width="stretch")
             # Display only the first image in the batch and remove batch dimension
-            col2.image(prediction[0], caption='Predicted Image', use_container_width=True)
+            col2.image(prediction[0], caption='Predicted Image', width="stretch")
         else:
             st.warning('Please upload an image.')
 
