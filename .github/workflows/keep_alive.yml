@@ -1,0 +1,11 @@
+name: Keep Streamlit App Awake
+on:
+  schedule:
+    - cron: '*/30 * * * *' # Runs every 30 minutes
+  workflow_dispatch: # Allows manual triggering
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit App
+        run: curl -v https://brain--tumor--segmentation.streamlit.app/
