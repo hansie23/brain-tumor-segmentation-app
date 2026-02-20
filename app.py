@@ -24,7 +24,7 @@ def get_model(token):
     model_weights_path = hf_hub_download(
         repo_id="hansie23/brain-tumor-segmentation-model",
         filename="optimized_unet_checkpoint.keras",
-        use_auth_token=token
+        token=token
     )
     model = load_model_and_weights(model_weights_path)
     return model
